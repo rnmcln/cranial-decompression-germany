@@ -1,0 +1,43 @@
+ANNUAL PROFILE (unit = discharge episode)
+  2019: episodes=941 ge60%=50.8 deaths=206 mort%=21.9 I63=258750 I63ge60%=85.5 ratio/1000=3.64
+  2020: episodes=893 ge60%=48.2 deaths=246 mort%=27.5 I63=243111 I63ge60%=85.4 ratio/1000=3.67
+  2021: episodes=975 ge60%=50.1 deaths=233 mort%=23.9 I63=247085 I63ge60%=85.4 ratio/1000=3.95
+  2022: episodes=855 ge60%=49.7 deaths=209 mort%=24.4 I63=241764 I63ge60%=85.7 ratio/1000=3.54
+  2023: episodes=937 ge60%=50.6 deaths=227 mort%=24.2 I63=249495 I63ge60%=86.0 ratio/1000=3.76
+  2024: episodes=897 ge60%=49.3 deaths=228 mort%=25.4 I63=253980 I63ge60%=86.1 ratio/1000=3.53
+  POOLED: episodes=5498 deaths=1349 mort%=24.5 I63=1494185 ratio/1000=3.68
+"
+AGE-SPECIFIC UTILISATION RATIO (episodes per 1000 primary-I63 episodes)"
+     <40: cohort=401 I63=21042 ratio=19.06
+   40-49: cohort=703 I63=45060 ratio=15.60
+   50-54: cohort=681 I63=54727 ratio=12.44
+   55-59: cohort=976 I63=91790 ratio=10.63
+   60-64: cohort=1012 I63=125710 ratio=8.05
+   65-74: cohort=1354 I63=330590 ratio=4.10
+   75-79: cohort=250 I63=215926 ratio=1.16
+     80+: cohort=121 I63=608071 ratio=0.20
+  <60: 12.99 per 1000 ; >=60: 2.14 per 1000
+"
+RECONSTRUCTED AGE-BAND IN-HOSPITAL MORTALITY"
+     <40: episodes=401 deaths=53 mortality%=13.2
+   40-49: episodes=703 deaths=134 mortality%=19.1
+   50-54: episodes=681 deaths=129 mortality%=18.9
+   55-59: episodes=976 deaths=223 mortality%=22.8
+   60-64: episodes=1012 deaths=273 mortality%=27.0
+   65-74: episodes=1354 deaths=389 mortality%=28.7
+   75-79: episodes=250 deaths=97 mortality%=38.8
+     80+: episodes=121 deaths=51 mortality%=42.1
+"
+POOLED DISCHARGE DISPOSITION"
+  transfer_06                                 2195 (39.9%)
+  death_07                                    1349 (24.5%)
+  rehabilitation_09                           1260 (22.9%)
+  nursing_10                                    84 (1.5%)
+  home_routine_other_hospice_residual          610 (11.1%)
+  audit: explicit categories sum to N=5498 -> 5498
+"
+POOLED I63 SUBCODE COMPOSITION"
+  cerebral_arterial_I63.3-5     4099 (74.6%)
+  precerebral_I63.0-2           1070 (19.5%)
+  other_unspec_I63.8-9           317 (5.8%)
+  venous_I63.6                    12 (0.2%)

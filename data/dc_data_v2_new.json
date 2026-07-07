@@ -1,0 +1,320 @@
+{
+  "_meta": {
+    "study": "Cranial decompression (OPS 5-012.0) with a primary diagnosis of cerebral infarction (ICD-10-GM I63), Germany, 2019-2024",
+    "contents": "I63 subcode composition (principal-diagnosis output), discharge disposition (discharge-reason filters), and the all-primary-I63 utilisation denominator, by data year 2019-2024. For each year the cohort was rebuilt independently from the procedure and diagnosis filters, and the reproduced episode count matched the base extraction.",
+    "disposition_codes": {
+      "06": "transfer to another hospital",
+      "07": "death",
+      "08": "transfer (cooperative arrangement)",
+      "09": "rehabilitation facility",
+      "10": "nursing facility",
+      "11": "hospice"
+    },
+    "disposition_method_note": "Only discharge reasons 06, 07, 09, 10 return unsuppressed counts. Hospice (11) was queried every year but returned <4 (suppressed) or 0. The field 'home_routine_other_hospice_residual' = N - (06 + 07 + 09 + 10) and therefore contains routine/home discharge, all other unqueried reasons (01/02/03/04/05/08/13), AND any suppressed hospice (11) episodes; it is a residual and hospice cannot be separated from it. 'hospice_11_query' records the raw suppressed query result for provenance only and is NOT additionally subtracted.",
+    "source": "InEK DatenBrowser, aggregate published counts, data years 2019-2024"
+  },
+  "years": {
+    "2024": {
+      "dataset": "DRG2024",
+      "subtype_composition": {
+        "_N": 897,
+        "I63.4": {
+          "faelle": 251,
+          "pct": 27.98
+        },
+        "I63.3": {
+          "faelle": 221,
+          "pct": 24.64
+        },
+        "I63.5": {
+          "faelle": 182,
+          "pct": 20.29
+        },
+        "I63.0": {
+          "faelle": 95,
+          "pct": 10.59
+        },
+        "I63.1": {
+          "faelle": 48,
+          "pct": 5.35
+        },
+        "I63.8": {
+          "faelle": 48,
+          "pct": 5.35
+        },
+        "I63.2": {
+          "faelle": 43,
+          "pct": 4.79
+        },
+        "I63.9": {
+          "faelle": 8,
+          "pct": 0.89
+        },
+        "I63.6_venous_rest": {
+          "faelle": 1,
+          "pct": 0.11
+        },
+        "_groups": {
+          "cerebral_arterial_I63.3-5": 654,
+          "precerebral_I63.0-2": 186,
+          "other_unspec_I63.8-9": 56,
+          "venous_I63.6": 1
+        }
+      },
+      "disposition": {
+        "_N": 897,
+        "transfer_06": 382,
+        "death_07": 228,
+        "rehabilitation_09": 176,
+        "nursing_10": 14,
+        "hospice_11_query": "<4 (suppressed)",
+        "home_routine_other_hospice_residual": 97
+      },
+      "denominator_all_I63": {
+        "total": 253980,
+        "age_bands_pct": {
+          "18-29": 0.32,
+          "30-39": 1.09,
+          "40-49": 3.06,
+          "50-54": 3.29,
+          "55-59": 6.01,
+          "60-64": 8.99,
+          "65-74": 23.09,
+          "75-79": 12.89,
+          "80+": 41.17,
+          "_paeds_lt18_sum": 0.09
+        },
+        "ge60_pct": 86.14
+      }
+    },
+    "2023": {
+      "dataset": "DRG2023",
+      "subtype_composition": {
+        "_N": 937,
+        "I63.4": 304,
+        "I63.3": 219,
+        "I63.5": 158,
+        "I63.0": 88,
+        "I63.8": 62,
+        "I63.1": 61,
+        "I63.2": 36,
+        "I63.9": 7,
+        "I63.6_venous_rest": 2,
+        "_groups": {
+          "cerebral_arterial_I63.3-5": 681,
+          "precerebral_I63.0-2": 185,
+          "other_unspec_I63.8-9": 69,
+          "venous_I63.6": 2
+        }
+      },
+      "disposition": {
+        "_N": 937,
+        "transfer_06": 389,
+        "death_07": 227,
+        "rehabilitation_09": 206,
+        "nursing_10": 15,
+        "hospice_11_query": "<4 (suppressed)",
+        "home_routine_other_hospice_residual": 100
+      },
+      "denominator_all_I63": {
+        "total": 249495,
+        "age_bands_pct": {
+          "18-29": 0.33,
+          "30-39": 1.05,
+          "40-49": 2.97,
+          "50-54": 3.43,
+          "55-59": 6.19,
+          "60-64": 8.69,
+          "65-74": 23.12,
+          "75-79": 13.13,
+          "80+": 41.03,
+          "_paeds_lt18_sum": 0.08
+        },
+        "ge60_pct": 85.97
+      }
+    },
+    "2022": {
+      "dataset": "DRG2022",
+      "subtype_composition": {
+        "_N": 855,
+        "I63.4": 249,
+        "I63.3": 220,
+        "I63.5": 164,
+        "I63.0": 82,
+        "I63.2": 59,
+        "I63.8": 39,
+        "I63.1": 36,
+        "I63.9_I63.6_rest": 6,
+        "_groups": {
+          "cerebral_arterial_I63.3-5": 633,
+          "precerebral_I63.0-2": 177,
+          "other_unspec_I63.8-9": 45,
+          "venous_I63.6": "in rest (<4 suppressed)"
+        }
+      },
+      "disposition": {
+        "_N": 855,
+        "transfer_06": 344,
+        "death_07": 209,
+        "rehabilitation_09": 182,
+        "nursing_10": 19,
+        "hospice_11_query": "0 (no cases)",
+        "home_routine_other_hospice_residual": 101
+      },
+      "denominator_all_I63": {
+        "total": 241764,
+        "age_bands_pct": {
+          "18-29": 0.31,
+          "30-39": 1.07,
+          "40-49": 2.96,
+          "50-54": 3.67,
+          "55-59": 6.22,
+          "60-64": 8.62,
+          "65-74": 22.57,
+          "75-79": 13.45,
+          "80+": 41.05,
+          "_paeds_lt18_sum": 0.09
+        },
+        "ge60_pct": 85.69
+      }
+    },
+    "2021": {
+      "dataset": "DRG2021",
+      "subtype_composition": {
+        "_N": 975,
+        "I63.4": 298,
+        "I63.3": 252,
+        "I63.5": 177,
+        "I63.0": 93,
+        "I63.1": 49,
+        "I63.2": 46,
+        "I63.8": 44,
+        "I63.9": 9,
+        "I63.6": 7,
+        "_groups": {
+          "cerebral_arterial_I63.3-5": 727,
+          "precerebral_I63.0-2": 188,
+          "other_unspec_I63.8-9": 53,
+          "venous_I63.6": 7
+        }
+      },
+      "disposition": {
+        "_N": 975,
+        "transfer_06": 406,
+        "death_07": 233,
+        "rehabilitation_09": 211,
+        "nursing_10": 18,
+        "hospice_11_query": "<4 (suppressed)",
+        "home_routine_other_hospice_residual": 107
+      },
+      "denominator_all_I63": {
+        "total": 247085,
+        "age_bands_pct": {
+          "18-29": 0.36,
+          "30-39": 1.09,
+          "40-49": 3.07,
+          "50-54": 3.75,
+          "55-59": 6.26,
+          "60-64": 8.29,
+          "65-74": 22.04,
+          "75-79": 14.01,
+          "80+": 41.03,
+          "_paeds_lt18_sum": 0.1
+        },
+        "ge60_pct": 85.37
+      }
+    },
+    "2020": {
+      "dataset": "DRG2020",
+      "subtype_composition": {
+        "_N": 893,
+        "I63.4": 297,
+        "I63.3": 219,
+        "I63.5": 161,
+        "I63.0": 87,
+        "I63.1": 48,
+        "I63.2": 39,
+        "I63.8": 36,
+        "I63.9": 5,
+        "I63.6_rest": 1,
+        "_groups": {
+          "cerebral_arterial_I63.3-5": 677,
+          "precerebral_I63.0-2": 174,
+          "other_unspec_I63.8-9": 41,
+          "venous_I63.6": 1
+        }
+      },
+      "disposition": {
+        "_N": 893,
+        "transfer_06": 318,
+        "death_07": 246,
+        "rehabilitation_09": 227,
+        "nursing_10": 6,
+        "hospice_11_query": "0 (no cases)",
+        "home_routine_other_hospice_residual": 96
+      },
+      "denominator_all_I63": {
+        "total": 243111,
+        "age_bands_pct": {
+          "18-29": 0.35,
+          "30-39": 1.08,
+          "40-49": 2.98,
+          "50-54": 3.91,
+          "55-59": 6.17,
+          "60-64": 8.11,
+          "65-74": 21.14,
+          "75-79": 15.86,
+          "80+": 40.3,
+          "_paeds_lt18_sum": 0.09
+        },
+        "ge60_pct": 85.41
+      }
+    },
+    "2019": {
+      "dataset": "DRG2019",
+      "subtype_composition": {
+        "_N": 941,
+        "I63.4": 313,
+        "I63.3": 244,
+        "I63.5": 170,
+        "I63.0": 79,
+        "I63.8": 44,
+        "I63.1": 42,
+        "I63.2": 39,
+        "I63.9": 9,
+        "I63.6_rest": 1,
+        "_groups": {
+          "cerebral_arterial_I63.3-5": 727,
+          "precerebral_I63.0-2": 160,
+          "other_unspec_I63.8-9": 53,
+          "venous_I63.6": 1
+        }
+      },
+      "disposition": {
+        "_N": 941,
+        "transfer_06": 356,
+        "death_07": 206,
+        "rehabilitation_09": 258,
+        "nursing_10": 12,
+        "hospice_11_query": "<4 (suppressed)",
+        "home_routine_other_hospice_residual": 109
+      },
+      "denominator_all_I63": {
+        "total": 258750,
+        "age_bands_pct": {
+          "18-29": 0.36,
+          "30-39": 1.04,
+          "40-49": 3.05,
+          "50-54": 3.93,
+          "55-59": 6.02,
+          "60-64": 7.79,
+          "65-74": 20.81,
+          "75-79": 17.29,
+          "80+": 39.63,
+          "_paeds_lt18_sum": 0.09
+        },
+        "ge60_pct": 85.52
+      }
+    }
+  }
+}

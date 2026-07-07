@@ -1,0 +1,597 @@
+{
+  "_meta": {
+    "study": "Cranial decompression (OPS 5-012.0) with a primary diagnosis of cerebral infarction (ICD-10-GM I63), Germany, 2019-2024",
+    "data_source": "InEK DatenBrowser (datenbrowser.inek.org); annual grouped DRG deliveries; national aggregate, discharge-based counts",
+    "cohort_procedure": "5-012.0 (incision of the skull bones [craniotomy and craniectomy]: decompression)",
+    "cohort_primary_dx": [
+      "I63.0",
+      "I63.1",
+      "I63.2",
+      "I63.3",
+      "I63.4",
+      "I63.5",
+      "I63.6",
+      "I63.8",
+      "I63.9"
+    ],
+    "unit": "discharge episode (not patient)",
+    "notes": "Counts and percentages are read from the InEK DatenBrowser summary output. Age-band counts are reconstructed from reported percentages and annual totals where indicated and are approximate; overall (all-age) counts are exact. The <60 vs >=60 overlay uses the 55-59 / 60-64 band boundary.",
+    "source": "InEK DatenBrowser, aggregate published counts, data years 2019-2024"
+  },
+  "years": {
+    "2024": {
+      "dataset": "DRG2024 (annual grouped delivery)",
+      "base_cohort": {
+        "episode_count": 897,
+        "sex_pct": {
+          "maennlich": 62.1,
+          "weiblich": 37.9,
+          "divers": 0.0,
+          "unbestimmt": 0.0
+        },
+        "los": {
+          "kurzlieger_pct": 7.8,
+          "normallieger_pct": 79.26,
+          "langlieger_pct": 12.93,
+          "mean_vwd_days": 25.8,
+          "sd_vwd_days": 39.4,
+          "hk_vwd_pct": 39.53
+        },
+        "pccl_pct": {
+          "0": 6.02,
+          "1": 4.79,
+          "2": 9.03,
+          "3": 30.99,
+          "4": 34.23,
+          "5": 13.49,
+          "6": 1.45
+        },
+        "age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.0,
+          "1-2": 0.11,
+          "3-5": 0.22,
+          "6-9": 0.0,
+          "10-15": 0.33,
+          "16-17": 0.11,
+          "18-29": 1.34,
+          "30-39": 6.13,
+          "40-49": 13.94,
+          "50-54": 11.37,
+          "55-59": 17.17,
+          "60-64": 20.51,
+          "65-74": 23.41,
+          "75-79": 4.01,
+          "80+": 1.34
+        },
+        "age_overlay_pct": {
+          "le59": 50.72,
+          "ge60": 49.27
+        }
+      },
+      "mortality": {
+        "deaths_count": 228,
+        "in_hospital_mortality_pct": 25.42,
+        "death_sex_pct": {
+          "maennlich": 60.53,
+          "weiblich": 39.47
+        },
+        "death_los": {
+          "kurzlieger_pct": 21.93,
+          "normallieger_pct": 75.88,
+          "langlieger_pct": 2.19,
+          "mean_vwd_days": 11.9,
+          "sd_vwd_days": 13.8,
+          "hk_vwd_pct": 46.34
+        },
+        "death_pccl_pct": {
+          "0": 5.26,
+          "1": 5.26,
+          "2": 10.53,
+          "3": 37.28,
+          "4": 27.63,
+          "5": 13.6,
+          "6": 0.44
+        },
+        "death_age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.0,
+          "1-2": 0.0,
+          "3-5": 0.0,
+          "6-9": 0.0,
+          "10-15": 0.44,
+          "16-17": 0.0,
+          "18-29": 0.88,
+          "30-39": 1.75,
+          "40-49": 13.6,
+          "50-54": 10.09,
+          "55-59": 14.91,
+          "60-64": 21.49,
+          "65-74": 28.07,
+          "75-79": 7.02,
+          "80+": 1.75
+        },
+        "death_age_overlay_pct": {
+          "le59": 41.67,
+          "ge60": 58.33
+        },
+        "derived_age_stratified": {
+          "n_ge60_cohort_approx": 442,
+          "n_le59_cohort_approx": 455,
+          "deaths_ge60_approx": 133,
+          "deaths_le59_approx": 95,
+          "mortality_ge60_pct_approx": 30.1,
+          "mortality_le59_pct_approx": 20.9
+        }
+      }
+    },
+    "2023": {
+      "dataset": "DRG2023 (annual grouped delivery)",
+      "base_cohort": {
+        "episode_count": 937,
+        "sex_pct": {
+          "maennlich": 64.46,
+          "weiblich": 35.43,
+          "divers": 0.0,
+          "unbestimmt": 0.11
+        },
+        "los": {
+          "kurzlieger_pct": 6.94,
+          "normallieger_pct": 82.18,
+          "langlieger_pct": 10.89,
+          "mean_vwd_days": 24.2,
+          "sd_vwd_days": 30.8,
+          "hk_vwd_pct": 43.93
+        },
+        "pccl_pct": {
+          "0": 6.19,
+          "1": 4.7,
+          "2": 8.75,
+          "3": 33.51,
+          "4": 31.48,
+          "5": 13.34,
+          "6": 2.03
+        },
+        "age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.11,
+          "1-2": 0.11,
+          "3-5": 0.11,
+          "6-9": 0.0,
+          "10-15": 0.11,
+          "16-17": 0.0,
+          "18-29": 1.81,
+          "30-39": 4.59,
+          "40-49": 12.81,
+          "50-54": 12.38,
+          "55-59": 17.4,
+          "60-64": 20.17,
+          "65-74": 24.01,
+          "75-79": 3.42,
+          "80+": 2.99
+        },
+        "age_overlay_pct": {
+          "le59": 49.43,
+          "ge60": 50.59
+        }
+      },
+      "mortality": {
+        "deaths_count": 227,
+        "in_hospital_mortality_pct": 24.23,
+        "death_los": {
+          "kurzlieger_pct": 18.5,
+          "normallieger_pct": 78.85,
+          "langlieger_pct": 2.64,
+          "mean_vwd_days": 11.2,
+          "sd_vwd_days": 13.5,
+          "hk_vwd_pct": 45.37
+        },
+        "death_age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.0,
+          "1-2": 0.0,
+          "3-5": 0.0,
+          "6-9": 0.0,
+          "10-15": 0.0,
+          "16-17": 0.0,
+          "18-29": 0.88,
+          "30-39": 3.08,
+          "40-49": 11.45,
+          "50-54": 11.89,
+          "55-59": 15.42,
+          "60-64": 19.82,
+          "65-74": 27.75,
+          "75-79": 5.73,
+          "80+": 3.96
+        },
+        "death_age_overlay_pct": {
+          "le59": 42.72,
+          "ge60": 57.26
+        },
+        "derived_age_stratified": {
+          "mortality_ge60_pct_approx": 27.4,
+          "mortality_le59_pct_approx": 21.0
+        }
+      }
+    },
+    "2022": {
+      "dataset": "DRG2022 (annual grouped delivery)",
+      "base_cohort": {
+        "episode_count": 855,
+        "sex_pct": {
+          "maennlich": 63.86,
+          "weiblich": 36.14,
+          "divers": 0.0,
+          "unbestimmt": 0.0
+        },
+        "los": {
+          "kurzlieger_pct": 7.49,
+          "normallieger_pct": 78.71,
+          "langlieger_pct": 13.8,
+          "mean_vwd_days": 25.9,
+          "sd_vwd_days": 31.4,
+          "hk_vwd_pct": 45.24
+        },
+        "pccl_pct": {
+          "0": 3.63,
+          "1": 3.39,
+          "2": 8.42,
+          "3": 27.49,
+          "4": 36.61,
+          "5": 18.36,
+          "6": 2.11
+        },
+        "age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.0,
+          "1-2": 0.0,
+          "3-5": 0.0,
+          "6-9": 0.0,
+          "10-15": 0.0,
+          "16-17": 0.12,
+          "18-29": 1.87,
+          "30-39": 5.26,
+          "40-49": 13.57,
+          "50-54": 10.99,
+          "55-59": 18.48,
+          "60-64": 19.42,
+          "65-74": 23.27,
+          "75-79": 4.68,
+          "80+": 2.34
+        },
+        "age_overlay_pct": {
+          "le59": 50.29,
+          "ge60": 49.71
+        }
+      },
+      "mortality": {
+        "deaths_count": 209,
+        "in_hospital_mortality_pct": 24.44,
+        "death_los": {
+          "kurzlieger_pct": 21.05,
+          "normallieger_pct": 77.03,
+          "langlieger_pct": 1.91,
+          "mean_vwd_days": 12.5,
+          "sd_vwd_days": 18.8,
+          "hk_vwd_pct": 39.84
+        },
+        "death_age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.0,
+          "1-2": 0.0,
+          "3-5": 0.0,
+          "6-9": 0.0,
+          "10-15": 0.0,
+          "16-17": 0.0,
+          "18-29": 0.0,
+          "30-39": 1.91,
+          "40-49": 6.7,
+          "50-54": 5.74,
+          "55-59": 17.22,
+          "60-64": 23.92,
+          "65-74": 27.27,
+          "75-79": 11.0,
+          "80+": 6.22
+        },
+        "death_age_overlay_pct": {
+          "le59": 31.57,
+          "ge60": 68.41
+        },
+        "derived_age_stratified": {
+          "mortality_ge60_pct_approx": 33.6,
+          "mortality_le59_pct_approx": 15.3
+        }
+      }
+    },
+    "2021": {
+      "dataset": "DRG2021 (annual grouped delivery)",
+      "base_cohort": {
+        "episode_count": 975,
+        "sex_pct": {
+          "maennlich": 60.31,
+          "weiblich": 39.69,
+          "divers": 0.0,
+          "unbestimmt": 0.0
+        },
+        "los": {
+          "kurzlieger_pct": 6.77,
+          "normallieger_pct": 79.69,
+          "langlieger_pct": 13.54,
+          "mean_vwd_days": 27.2,
+          "sd_vwd_days": 33.4,
+          "hk_vwd_pct": 44.83
+        },
+        "pccl_pct": {
+          "0": 3.9,
+          "1": 4.31,
+          "2": 6.97,
+          "3": 25.44,
+          "4": 38.15,
+          "5": 19.18,
+          "6": 2.05
+        },
+        "age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.0,
+          "1-2": 0.0,
+          "3-5": 0.1,
+          "6-9": 0.1,
+          "10-15": 0.31,
+          "16-17": 0.0,
+          "18-29": 1.54,
+          "30-39": 5.23,
+          "40-49": 11.9,
+          "50-54": 13.44,
+          "55-59": 17.33,
+          "60-64": 17.33,
+          "65-74": 25.44,
+          "75-79": 4.62,
+          "80+": 2.67
+        },
+        "age_overlay_pct": {
+          "le59": 49.95,
+          "ge60": 50.06
+        }
+      },
+      "mortality": {
+        "deaths_count": 233,
+        "in_hospital_mortality_pct": 23.9,
+        "death_los": {
+          "kurzlieger_pct": 22.32,
+          "normallieger_pct": 76.39,
+          "langlieger_pct": 1.29,
+          "mean_vwd_days": 12.2,
+          "sd_vwd_days": 17.1,
+          "hk_vwd_pct": 41.59
+        },
+        "death_age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.0,
+          "1-2": 0.0,
+          "3-5": 0.0,
+          "6-9": 0.0,
+          "10-15": 0.43,
+          "16-17": 0.0,
+          "18-29": 0.86,
+          "30-39": 4.29,
+          "40-49": 8.15,
+          "50-54": 9.44,
+          "55-59": 15.45,
+          "60-64": 21.46,
+          "65-74": 27.47,
+          "75-79": 7.3,
+          "80+": 5.15
+        },
+        "death_age_overlay_pct": {
+          "le59": 38.62,
+          "ge60": 61.38
+        },
+        "derived_age_stratified": {
+          "mortality_ge60_pct_approx": 29.3,
+          "mortality_le59_pct_approx": 18.5
+        }
+      }
+    },
+    "2020": {
+      "dataset": "DRG2020 (annual grouped delivery)",
+      "base_cohort": {
+        "episode_count": 893,
+        "sex_pct": {
+          "maennlich": 62.37,
+          "weiblich": 37.63,
+          "divers": 0.0,
+          "unbestimmt": 0.0
+        },
+        "los": {
+          "kurzlieger_pct": 7.73,
+          "normallieger_pct": 81.97,
+          "langlieger_pct": 10.3,
+          "mean_vwd_days": 23.3,
+          "sd_vwd_days": 27.5,
+          "hk_vwd_pct": 45.87
+        },
+        "pccl_pct": {
+          "0": 4.93,
+          "1": 2.8,
+          "2": 8.17,
+          "3": 30.35,
+          "4": 34.94,
+          "5": 17.36,
+          "6": 1.46
+        },
+        "age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.0,
+          "1-2": 0.11,
+          "3-5": 0.0,
+          "6-9": 0.0,
+          "10-15": 0.34,
+          "16-17": 0.0,
+          "18-29": 1.46,
+          "30-39": 5.15,
+          "40-49": 12.54,
+          "50-54": 12.21,
+          "55-59": 20.04,
+          "60-64": 15.79,
+          "65-74": 24.75,
+          "75-79": 5.94,
+          "80+": 1.68
+        },
+        "age_overlay_pct": {
+          "le59": 51.85,
+          "ge60": 48.16
+        }
+      },
+      "mortality": {
+        "deaths_count": 246,
+        "in_hospital_mortality_pct": 27.55,
+        "death_los": {
+          "kurzlieger_pct": 22.36,
+          "normallieger_pct": 76.02,
+          "langlieger_pct": 1.63,
+          "mean_vwd_days": 11.4,
+          "sd_vwd_days": 14.3,
+          "hk_vwd_pct": 44.45
+        },
+        "death_age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.0,
+          "1-2": 0.0,
+          "3-5": 0.0,
+          "6-9": 0.0,
+          "10-15": 0.41,
+          "16-17": 0.0,
+          "18-29": 1.22,
+          "30-39": 2.85,
+          "40-49": 10.16,
+          "50-54": 8.13,
+          "55-59": 21.95,
+          "60-64": 14.23,
+          "65-74": 30.49,
+          "75-79": 7.32,
+          "80+": 3.25
+        },
+        "death_age_overlay_pct": {
+          "le59": 44.72,
+          "ge60": 55.29
+        },
+        "derived_age_stratified": {
+          "mortality_ge60_pct_approx": 31.6,
+          "mortality_le59_pct_approx": 23.8
+        }
+      }
+    },
+    "2019": {
+      "dataset": "DRG2019 (annual grouped delivery)",
+      "base_cohort": {
+        "episode_count": 941,
+        "sex_pct": {
+          "maennlich": 58.77,
+          "weiblich": 41.23,
+          "divers": 0.0,
+          "unbestimmt": 0.0
+        },
+        "los": {
+          "kurzlieger_pct": 7.76,
+          "normallieger_pct": 82.89,
+          "langlieger_pct": 9.35,
+          "mean_vwd_days": 24.6,
+          "sd_vwd_days": 28.9,
+          "hk_vwd_pct": 45.98
+        },
+        "pccl_pct": {
+          "0": 2.34,
+          "1": 2.02,
+          "2": 7.12,
+          "3": 23.49,
+          "4": 44.53,
+          "5": 19.23,
+          "6": 1.28
+        },
+        "age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.0,
+          "1-2": 0.0,
+          "3-5": 0.0,
+          "6-9": 0.0,
+          "10-15": 0.0,
+          "16-17": 0.32,
+          "18-29": 2.13,
+          "30-39": 4.68,
+          "40-49": 12.11,
+          "50-54": 13.71,
+          "55-59": 16.26,
+          "60-64": 17.32,
+          "65-74": 26.67,
+          "75-79": 4.68,
+          "80+": 2.13
+        },
+        "age_overlay_pct": {
+          "le59": 49.21,
+          "ge60": 50.8
+        }
+      },
+      "mortality": {
+        "deaths_count": 206,
+        "in_hospital_mortality_pct": 21.89,
+        "death_los": {
+          "kurzlieger_pct": 29.13,
+          "normallieger_pct": 69.9,
+          "langlieger_pct": 0.97,
+          "mean_vwd_days": 11.1,
+          "sd_vwd_days": 12.3,
+          "hk_vwd_pct": 47.4
+        },
+        "death_age_bands_pct": {
+          "<28 days": 0.0,
+          "28 days-1 year": 0.0,
+          "1-2": 0.0,
+          "3-5": 0.0,
+          "6-9": 0.0,
+          "10-15": 0.0,
+          "16-17": 0.0,
+          "18-29": 1.46,
+          "30-39": 2.91,
+          "40-49": 9.22,
+          "50-54": 12.14,
+          "55-59": 13.59,
+          "60-64": 21.36,
+          "65-74": 32.04,
+          "75-79": 4.85,
+          "80+": 2.43
+        },
+        "death_age_overlay_pct": {
+          "le59": 39.32,
+          "ge60": 60.68
+        },
+        "derived_age_stratified": {
+          "mortality_ge60_pct_approx": 26.2,
+          "mortality_le59_pct_approx": 17.5
+        }
+      }
+    }
+  },
+  "excluded_years": {
+    "2025": "Only part-year DRG deliveries were available at extraction (January-September and January-December 2025); no year-end annual dataset was available. Excluded to keep the annual series comparable (2019-2024)."
+  },
+  "extraction_log": [
+    {
+      "date": "2026-07-07",
+      "dataset": "DRG2024",
+      "procedure": "5-012.0",
+      "main_dx": "I63.0-.9 (all 9)",
+      "filter": "none",
+      "tab": "summary",
+      "episode_count": 897
+    },
+    {
+      "date": "2026-07-07",
+      "dataset": "DRG2024",
+      "procedure": "5-012.0",
+      "main_dx": "I63.0-.9 (all 9)",
+      "filter": "discharge reason 07 (death)",
+      "tab": "summary",
+      "episode_count": 228
+    }
+  ]
+}
