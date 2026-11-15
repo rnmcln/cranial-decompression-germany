@@ -1,0 +1,4 @@
+measure,estimate,lcl,ucl
+risk_ratio_ge60_vs_lt60,1.52,1.38,1.67
+risk_difference_pp_ge60_minus_lt60,10.1,7.8,12.3
+utilisation_ratio_lt60_over_ge60,6.04,,

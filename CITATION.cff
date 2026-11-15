@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this code or the extracted counts, please cite this repository."
+title: "Cranial decompression for ischaemic stroke in Germany, 2019-2024: code and extracted aggregate counts"
+type: software
+authors:
+  - family-names: "Lawson McLean"
+    given-names: "Aaron"
+    orcid: "https://orcid.org/0000-0001-5528-6905"
+    affiliation: "Department of Neurosurgery, Jena University Hospital, Friedrich Schiller University Jena"
+repository-code: "https://github.com/rnmcln/cranial-decompression-germany"
+license: MIT
+version: "1.0.0"
+date-released: "2026-11-15"
+keywords:
+  - ischaemic stroke
+  - decompressive craniectomy
+  - administrative data
+  - Germany
+  - InEK DatenBrowser

@@ -1,121 +1,157 @@
-# Cranial decompression in hospitalised ischaemic stroke in Germany, 2019–2024
+# Cranial decompression for ischaemic stroke in Germany, 2019–2024
 
-Reproducibility repository for a descriptive study of cranial decompression
-associated with a primary diagnosis of cerebral infarction, using national
-aggregate inpatient billing data from the German InEK DatenBrowser.
+Code and extracted aggregate counts for a descriptive study of how cranial
+decompression for ischaemic stroke is used across age in Germany, relative to
+the age structure of the inpatient stroke population, and how in-hospital
+mortality and discharge destination vary with age.
 
-This repository contains the extracted aggregate data, the analysis and
-figure code, and the generated figures and results workbook. It does not
-contain the manuscript text.
+The repository reproduces every table value and figure of the study from two
+small JSON files. It contains no individual-level data.
 
-## Summary
+## Study summary
 
 **Question.** How is cranial decompression for ischaemic stroke distributed
-across the age spectrum in routine national practice in Germany, and how do
-utilisation and in-hospital outcomes vary with age?
+across age in Germany relative to the inpatient stroke population, and how do
+in-hospital mortality and discharge destination vary with age?
 
-**Data.** Public aggregate counts from the InEK DatenBrowser
-(datenbrowser.inek.org), which reports nationwide statutory (§21 KHEntgG) inpatient
-billing data grouped to German Diagnosis Related Groups. Data years 2019–2024.
-The unit is the discharge episode; there is no patient linkage. Cells with
-fewer than four cases are suppressed at source.
+**Data.** Aggregate counts from the InEK DatenBrowser
+(<https://datenbrowser.inek.org>), which publishes the billing data that German
+hospitals reimbursed under the Diagnosis Related Groups system submit under
+§21 KHEntgG. Data years 2019 to 2024, queried in July 2026. The unit of
+observation is the discharge episode; episodes of the same patient are not
+linked.
 
-**Cohort.** Discharge episodes with procedure code OPS 5-012.0 (cranial
-decompression within the craniotomy/craniectomy category) and a primary
-diagnosis of cerebral infarction (ICD-10-GM I63, nine leaf codes). This is a
-broad coded proxy and cannot identify malignant middle cerebral artery
-infarction.
+**Cohort.** Discharge episodes with the procedure code OPS 5-012.0 (incision of
+the skull bones, decompression) and a primary diagnosis of cerebral infarction
+(ICD-10-GM I63.0 to I63.6, I63.8, I63.9). The code does not distinguish
+hemicraniectomy from other decompression and does not record infarct territory.
 
-**Main measures.**
+**Measures.**
 
-- Episode volume, age distribution, in-hospital mortality (discharge reason 07),
-  discharge disposition (discharge-reason codes), and I63 subcode composition.
+- Age distribution of the cohort and of all inpatient episodes with a primary
+  I63 diagnosis.
 - Age-specific utilisation ratio: cohort episodes per 1000 primary-I63
-  inpatient episodes, by age band. The denominator is all primary-I63
-  episodes and is an episode count, not a patient count or an eligibility
-  denominator.
+  episodes in the same age band. The denominator includes all ischaemic
+  strokes, so the ratio describes utilisation relative to the stroke case mix,
+  not a treatment rate among eligible patients.
+- In-hospital mortality (discharge reason 07) overall and by age band.
+- Discharge disposition (discharge reasons 06, 07, 09, 10 and a residual).
+- Linear change over the six data years.
 
-**Headline results (pooled 2019–2024).**
+**Main results (pooled 2019–2024).**
 
-- 5,498 episodes over six years (mean 916/year; range 855–975).
-- Episodes aged 60 or older were about half of the cohort (49.8%), whereas
-  85.8% of the 1.49 million primary-I63 episodes were aged 60 or older.
-- The utilisation ratio fell with age, from 19.1 per 1000 below 40 to 0.2 per
-  1000 at 80 or older (12.99 per 1000 at <60 versus 2.14 at ≥60). The older
-  patient share reflects the older age structure of the inpatient case mix
-  rather than age-proportionate utilisation.
-- Reconstructed in-hospital mortality rose across the age spectrum overall,
-  from about 13% below 40 to about 42% at 80 or older; the largest between-band
-  increase was from 65–74 to 75–79.
-- Discharge disposition (pooled): transfer to another hospital 39.9%,
-  in-hospital death 24.5%, rehabilitation 22.9%, a home/routine/other/
-  suppressed-hospice residual 11.1%, nursing facility 1.5%.
-- Cerebral-artery codes (I63.3–I63.5) accounted for 74.6% of the cohort;
-  cerebral venous thrombosis (I63.6) for 0.2%.
+| Measure | Value |
+|---|---|
+| Decompression episodes | 5,498 (mean 916 per year) |
+| Aged 60 years or older | 49.8% of episodes (43.0% aged 60–74, 6.8% aged 75 or older) |
+| Primary-I63 episodes aged 60 or older | 85.7% of 1,494,185 |
+| Episodes per 1000 primary-I63 episodes | 17.9 below 40 years; 0.2 at 80 years or older; 12.9 below 60 versus 2.14 at 60 or older |
+| Change in utilisation | rate ratio per year 0.995 (95% CI 0.974–1.016) |
+| In-hospital mortality | 24.5% overall; 13.2% below 40 years to 42.1% at 80 or older |
+| Mortality, 60 or older versus below 60 | 29.6% versus 19.5%; risk ratio 1.52 (95% CI 1.38–1.67) |
+| Discharge disposition | transfer 39.9%, death 24.5%, rehabilitation 22.9%, residual 11.1%, nursing facility 1.5% |
+| Change in disposition | transfer 37.8% to 42.6%; rehabilitation 27.4% to 19.6% |
 
-**Boundaries.** Analyses are descriptive. The coded cohort cannot be equated
-with malignant MCA infarction. The utilisation ratio is a relative age-pattern
-measure, not a treatment rate among eligible patients. The unit is the discharge
-episode, so transfers can produce more than one episode per patient. Age-band
-mortality is reconstructed from grouped age distributions and is approximate;
-grouped bands do not permit a test for a change at exact age 60. Functional
-outcome (modified Rankin Scale) is not recorded.
+**Interpretation.** Half of the decompression episodes involved patients aged
+60 years or older, almost all of them younger than 75 years. Relative to the
+inpatient stroke population, utilisation fell about sixfold above age 60 and
+was rare beyond 75 years, where in-hospital mortality approached 40%.
+
+**Scope.** The analysis is descriptive and unadjusted. Functional outcome,
+stroke severity, timing of surgery and treatment limitations are not recorded
+in the data source. A death after interhospital transfer is not recorded in
+the operative episode.
 
 ## Repository layout
 
 ```
 data/
-  dc_data_base.json        cohort volume, sex, LOS, PCCL, age bands, mortality by year
-  dc_data_v2_new.json      I63 subcode composition, disposition, and the primary-I63 denominator by year
-  results_workbook.xlsx    multi-sheet summary workbook (built by src/build_workbook.py)
-  csv/                     tidy CSV tables (built by src/export_tables.py):
-                             annual_profile.csv, utilisation_by_age_pooled.csv,
-                             mortality_by_age_pooled.csv, disposition_by_year.csv,
-                             subtype_by_year.csv, denominator_by_year.csv
+  cohort_by_year.json                          cohort counts, sex, length of stay, PCCL,
+                                               age distribution, deaths and age distribution
+                                               of deaths, by data year
+  subcode_disposition_denominator_by_year.json I63 subcode composition, discharge disposition
+                                               and the all-primary-I63 denominator with its
+                                               age distribution, by data year
 src/
-  compute_statistics.py    prints all numeric results; writes results/summary_statistics.csv
-  export_tables.py         writes the tidy CSV tables into data/csv/
-  make_figures.py          generates all figures (PNG 600 dpi and PDF) into figures/
-  build_workbook.py        rebuilds data/results_workbook.xlsx
-figures/                   generated figures (main fig1–fig4, supplementary figS1–figS3)
-results/                   created on run; holds summary_statistics.csv
-requirements.txt
-LICENSE
+  common.py      age-band definitions, data loading, interval estimators
+  analysis.py    computes every reported value; writes results/
+  figures.py     draws the figures from results/; writes figures/
+results/         CSV tables and summary.json (generated)
+figures/         PDF and 600 dpi PNG figures (generated)
 ```
 
-The JSON files are the primary source; the CSV tables in `data/csv/` are a
-human-readable export of the same values for direct inspection. All labels are
-in English. Age-band counts in the utilisation and mortality tables are
-reconstructed from reported age-band percentages and annual totals and are
-approximate; overall counts are exact.
+Both JSON files contain a `_meta` block documenting the query definitions,
+the disposition residual and the handling of suppressed cells.
 
-## Data dictionary (brief)
+## Methods in brief
 
-- `dc_data_base.json`: for each year, `base_cohort` (episode_count, sex, length of
-  stay, PCCL distribution, native age-band percentages, ≥60 overlay) and
-  `mortality` (death count, in-hospital mortality, death age-band percentages).
-- `dc_data_v2_new.json`: for each year, `subtype_composition` (I63 subcode
-  counts and grouped totals), `disposition` (discharge-reason counts, with the
-  residual and the raw suppressed hospice query result), and
-  `denominator_all_I63` (all primary-I63 episodes and their age distribution).
-  The `_meta` block documents the disposition residual and the extraction and
-  reconstruction methods.
+- **Age-band counts.** The source reports age distributions as percentages
+  with two decimal places. Band counts of episodes, deaths and denominator
+  episodes are reconstructed as total × percentage / 100 and summed over years.
+  The rounding error is below 0.1 episodes per native band and year in the
+  cohort and below 13 episodes in the denominator. Patients younger than 18
+  years are assigned to the band below 40 years in numerator and denominator.
+- **Disposition.** Only discharge reasons 06, 07, 09 and 10 return unsuppressed
+  counts. The residual (total minus these four reasons) contains routine and
+  home discharge, other reasons and hospice discharges, which were suppressed
+  (fewer than four) or zero in every year.
+- **Intervals and tests.** Wilson intervals for proportions; Poisson (Byar)
+  intervals for utilisation ratios; Katz interval for the risk ratio; Newcombe
+  hybrid score interval for the risk difference; log-linear Poisson model with
+  overdispersion-scaled standard error for the trend in utilisation;
+  Cochran–Armitage test for trends in proportions.
+- **Integrity checks.** `results/integrity_checks.csv` confirms that the annual
+  episode counts from independently rebuilt queries agree, that subcode groups
+  and disposition categories sum to the annual totals, and that death counts
+  agree between queries. `analysis.py` stops if any check fails.
 
 ## Reproduce
 
+Python 3.10 or later.
+
 ```bash
 pip install -r requirements.txt
-python src/compute_statistics.py     # prints results, writes results/summary_statistics.csv
-python src/export_tables.py          # writes tidy CSV tables into data/csv/
-python src/make_figures.py           # writes figures/*.png and figures/*.pdf
-python src/build_workbook.py         # rebuilds data/results_workbook.xlsx
+cd src
+python analysis.py     # writes results/*.csv and results/summary.json
+python figures.py      # writes figures/*.pdf and figures/*.png
 ```
 
-Each year's cohort volume was rebuilt independently at the data source and
-matched an earlier extraction exactly, as an integrity check
-(2019, 941; 2020, 893; 2021, 975; 2022, 855; 2023, 937; 2024, 897).
+The analysis is deterministic; repeated runs give identical result files.
+Figures use Liberation Sans, falling back to Arial, Helvetica or DejaVu Sans.
 
-## License
+## Output files
 
-Code and derived data tables are released under the MIT License (see LICENSE).
-The underlying counts are public aggregate figures from the InEK DatenBrowser.
+| File | Content |
+|---|---|
+| `annual_profile.csv` | episodes, sex, length of stay, PCCL, age 60 or older, deaths, mortality with 95% CI, primary-I63 episodes and utilisation ratio, by year and pooled |
+| `utilisation_by_age.csv` | cohort and denominator counts and utilisation ratio with 95% CI by age band, below 60, 60 or older, and all ages |
+| `mortality_by_age.csv` | reconstructed episodes, deaths and mortality with 95% CI by age band |
+| `age_strata.csv` | risk ratio and risk difference for death, 60 or older versus below 60 |
+| `disposition_by_year.csv` | disposition counts by year, pooled count and share |
+| `subcode_by_year.csv` | I63 subcode groups by year |
+| `temporal_trends.csv` | trend estimates for utilisation, transfer, rehabilitation and mortality |
+| `integrity_checks.csv` | consistency checks across queries |
+| `summary.json` | all reported values in one file |
+
+| Figure | Content |
+|---|---|
+| `fig1_age_utilisation` | (a) age distribution of the cohort and of all primary-I63 episodes; (b) utilisation ratio by age band, log scale |
+| `fig2_mortality_by_age` | in-hospital mortality by age band |
+| `fig3_disposition_by_year` | discharge disposition by data year |
+| `figS1_subcode_by_year` | I63 subcode composition by data year |
+
+## Data source and licence
+
+The counts in `data/` were read from the publicly accessible InEK DatenBrowser
+of the Institut für das Entgeltsystem im Krankenhaus (InEK GmbH). They are
+aggregate published figures, reproduced here with attribution so that the
+analysis can be checked; they are not covered by the code licence. Source:
+InEK DatenBrowser, Datenveröffentlichung gemäß §21 KHEntgG, data years
+2019–2024, <https://datenbrowser.inek.org>.
+
+The code in `src/` is released under the MIT License (see `LICENSE`).
+
+## Citation
+
+See `CITATION.cff`. An archived version of this repository is available on
+Zenodo.

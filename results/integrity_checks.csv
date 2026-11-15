@@ -1,0 +1,7 @@
+year,episodes_first_extraction,episodes_rebuilt_subcode_query,episodes_rebuilt_disposition_query,counts_match,subcode_groups_sum,disposition_categories_sum_to_total,death_count_consistent
+2019,941,941,941,True,941,True,True
+2020,893,893,893,True,893,True,True
+2021,975,975,975,True,975,True,True
+2022,855,855,855,True,855,True,True
+2023,937,937,937,True,937,True,True
+2024,897,897,897,True,897,True,True

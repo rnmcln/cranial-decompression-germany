@@ -1,0 +1,5 @@
+measure,estimate,lcl,ucl,p_two_sided,pearson_dispersion
+utilisation_ratio_rate_ratio_per_year,0.995,0.974,1.016,,1.93
+rehabilitation_share_cochran_armitage_z,-4.26,,,2e-05,
+transfer_share_cochran_armitage_z,2.93,,,0.0034,
+in_hospital_mortality_cochran_armitage_z,0.73,,,0.46,

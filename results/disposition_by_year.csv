@@ -1,0 +1,8 @@
+disposition,2019,2020,2021,2022,2023,2024,pooled_n,pooled_pct
+Transfer to another hospital (06),356,318,406,344,389,382,2195,39.9
+In-hospital death (07),206,246,233,209,227,228,1349,24.5
+Rehabilitation facility (09),258,227,211,182,206,176,1260,22.9
+Nursing facility (10),12,6,18,19,15,14,84,1.5
+"Residual: routine, home, other reasons, suppressed hospice",109,96,107,101,100,97,610,11.1
+Total,941,893,975,855,937,897,5498,100.0
+"Hospice (11), raw query result",<4 (suppressed),0 (no cases),<4 (suppressed),0 (no cases),<4 (suppressed),<4 (suppressed),,
