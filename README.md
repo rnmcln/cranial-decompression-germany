@@ -1,5 +1,7 @@
 # Cranial decompression for ischaemic stroke in Germany, 2019–2024
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24236655.svg)](https://doi.org/10.5281/zenodo.24236655)
+
 Code and extracted aggregate counts for a descriptive study of how cranial
 decompression for ischaemic stroke is used across age in Germany, relative to
 the age structure of the inpatient stroke population, and how in-hospital
@@ -153,5 +155,6 @@ The code in `src/` is released under the MIT License (see `LICENSE`).
 
 ## Citation
 
-See `CITATION.cff`. An archived version of this repository is available on
-Zenodo.
+See `CITATION.cff`. Version 1.0.0 is archived on Zenodo:
+<https://doi.org/10.5281/zenodo.24236655> (all versions:
+<https://doi.org/10.5281/zenodo.24236654>).

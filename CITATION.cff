@@ -10,6 +10,7 @@ authors:
 repository-code: "https://github.com/rnmcln/cranial-decompression-germany"
 license: MIT
 version: "1.0.0"
+doi: "10.5281/zenodo.24236655"
 date-released: "2026-11-15"
 keywords:
   - ischaemic stroke
