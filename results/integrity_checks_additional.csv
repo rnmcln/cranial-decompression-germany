@@ -1,7 +1,7 @@
-year,cohort_reextracted,cohort_original,cohort_count_match,cohort_age_distribution_match,transfer_count_match,rehabilitation_count_match,oedema_subsets_nested,reperfusion_subsets_nested
-2019,941,941,True,True,True,True,True,True
-2020,893,893,True,True,True,True,True,True
-2021,975,975,True,True,True,True,True,True
-2022,855,855,True,True,True,True,True,True
-2023,937,937,True,True,True,True,True,True
-2024,897,897,True,True,True,True,True,True
+year,cohort_reextracted,cohort_original,cohort_count_match,cohort_age_distribution_match,transfer_count_match,rehabilitation_count_match,oedema_subsets_nested,reperfusion_subsets_nested,palliative_subsets_nested
+2019,941,941,True,True,True,True,True,True,True
+2020,893,893,True,True,True,True,True,True,True
+2021,975,975,True,True,True,True,True,True,True
+2022,855,855,True,True,True,True,True,True,True
+2023,937,937,True,True,True,True,True,True,True
+2024,897,897,True,True,True,True,True,True,True

@@ -1,0 +1,8 @@
+year,I63_with_oedema_code,palliative_coded,palliative_pct,lcl,ucl,palliative_codes_listed,decompression_with_oedema_code,decompression_with_palliative,decompression_palliative_pct_low,decompression_palliative_pct_high,no_decompression_palliative_pct_low,no_decompression_palliative_pct_high
+2019,4136,49,1.18,0.9,1.56,26,605,suppressed (0-3),0.0,0.5,1.3,1.39
+2020,3900,58,1.49,1.15,1.92,32,581,suppressed (0-3),0.0,0.52,1.66,1.75
+2021,4207,80,1.9,1.53,2.36,29,669,suppressed (0-3),0.0,0.45,2.18,2.26
+2022,3846,51,1.33,1.01,1.74,29,556,suppressed (0-3),0.0,0.54,1.46,1.55
+2023,4081,75,1.84,1.47,2.3,27,641,7,1.09,1.09,1.98,1.98
+2024,4028,117,2.9,2.43,3.47,28,611,15,2.45,2.45,2.99,2.99
+Pooled,24198,430,1.78,1.62,1.95,,3663,22-34,0.6,0.93,1.93,1.99

@@ -10,6 +10,8 @@ Outputs (results/):
   subcode_by_year.csv       I63 subcode groups by year and pooled
   temporal_trends.csv       linear trend estimates across 2019-2024
   integrity_checks.csv      arithmetic and reproduction checks
+  oedema_subgroup_by_*.csv, disposition_by_age.csv, reperfusion_by_*.csv,
+  palliative_by_*.csv       measures from the additional queries
   summary.json              all reported values in one machine-readable file
 """
 import csv
@@ -280,12 +282,14 @@ for y in YEARS:
     row = [y, q["Q0"]["n"], base["episode_count"], q["Q0"]["n"] == base["episode_count"], same_age,
            q["Q4"]["n"] == disp["transfer_06"], q["Q5"]["n"] == disp["rehabilitation_09"],
            q["Q2"]["n"] <= q["Q1"]["n"] and q["Q2"]["n"] <= q["Q0"]["n"] and q["Q3"]["n"] <= q["Q2"]["n"],
-           q["Q6"]["n"] <= q["Q0"]["n"] and q["Q7"]["n"] <= q["Q0"]["n"]]
+           q["Q6"]["n"] <= q["Q0"]["n"] and q["Q7"]["n"] <= q["Q0"]["n"],
+           q["Q8"]["n"] <= q["Q1"]["n"] and (q["Q9"]["n"] is None
+                                              or (q["Q9"]["n"] <= q["Q8"]["n"] and q["Q9"]["n"] <= q["Q2"]["n"]))]
     add_chk.append(row)
 write("integrity_checks_additional.csv",
       ["year", "cohort_reextracted", "cohort_original", "cohort_count_match", "cohort_age_distribution_match",
        "transfer_count_match", "rehabilitation_count_match", "oedema_subsets_nested",
-       "reperfusion_subsets_nested"], add_chk)
+       "reperfusion_subsets_nested", "palliative_subsets_nested"], add_chk)
 assert all(all(r[3:]) for r in add_chk), "additional integrity check failed"
 
 # ---- oedema-defined subgroup by year
@@ -371,6 +375,53 @@ S["reperfusion"] = {"thrombectomy_pooled": [MT, r(100 * MT / N, 1)], "thrombolys
                     "trend_thrombectomy_z_p": [r(zmt, 2), float(f"{pmt:.2g}")],
                     "trend_thrombolysis_z_p": [r(ziv, 2), float(f"{piv:.2g}")],
                     "thrombectomy_by_band_pct": {x[0]: x[3] for x in ra}}
+
+# ---- palliative-care procedure codes in the oedema-defined subgroup
+# Q8: oedema-coded primary-I63 episodes with a palliative-care code (8-982, 8-98e, 8-98h);
+# Q9: the same within decompression episodes. A suppressed cell (below the display
+# threshold) holds 0 to SUPPRESSED_MAX episodes and is carried as a bound, not imputed.
+SUPPRESSED_MAX = 3
+pl = []
+lo9 = hi9 = 0
+for y in YEARS:
+    q = A[y]
+    n1, n2, n8, n9 = q["Q1"]["n"], q["Q2"]["n"], q["Q8"]["n"], q["Q9"]["n"]
+    a, b = (n9, n9) if n9 is not None else (0, SUPPRESSED_MAX)
+    lo9 += a; hi9 += b
+    l8, u8 = wilson(n8, n1)
+    pl.append([y, n1, n8, r(100 * n8 / n1, 2), r(100 * l8, 2), r(100 * u8, 2), len(q["Q8"]["further_procedure_codes"]),
+               n2, n9 if n9 is not None else f"suppressed (0-{SUPPRESSED_MAX})",
+               r(100 * a / n2, 2), r(100 * b / n2, 2),
+               r(100 * (n8 - b) / (n1 - n2), 2), r(100 * (n8 - a) / (n1 - n2), 2)])
+T8 = sum(A[y]["Q8"]["n"] for y in YEARS)
+l8, u8 = wilson(T8, T1)
+pl.append(["Pooled", T1, T8, r(100 * T8 / T1, 2), r(100 * l8, 2), r(100 * u8, 2), "",
+           T2, f"{lo9}-{hi9}", r(100 * lo9 / T2, 2), r(100 * hi9 / T2, 2),
+           r(100 * (T8 - hi9) / (T1 - T2), 2), r(100 * (T8 - lo9) / (T1 - T2), 2)])
+write("palliative_by_year.csv",
+      ["year", "I63_with_oedema_code", "palliative_coded", "palliative_pct", "lcl", "ucl", "palliative_codes_listed",
+       "decompression_with_oedema_code", "decompression_with_palliative", "decompression_palliative_pct_low",
+       "decompression_palliative_pct_high", "no_decompression_palliative_pct_low",
+       "no_decompression_palliative_pct_high"], pl)
+P8 = pooled("Q8")
+pa = []
+for name, grp in [(b, [b]) for b in BANDS] + [("<60", LT60), (">=60", GE60), (">=75", ["75-79", "80+"])]:
+    d1 = sum(P1[b] for b in grp); d8 = sum(P8[b] for b in grp)
+    lo, hi = wilson(d8, d1)
+    pa.append([name, round(d1), round(d8), r(100 * d8 / d1, 2), r(100 * lo, 2), r(100 * hi, 2)])
+write("palliative_by_age.csv", ["age_band", "I63_with_oedema_code", "palliative_coded", "palliative_pct", "lcl", "ucl"], pa)
+zpl, ppl = cochran_armitage([A[y]["Q8"]["n"] for y in YEARS], [A[y]["Q1"]["n"] for y in YEARS])
+S["palliative"] = {"pooled": [T8, r(100 * T8 / T1, 1), r(100 * l8, 1), r(100 * u8, 1)],
+                   "pct_by_year": {x[0]: x[3] for x in pl[:-1]},
+                   "decompression_with_palliative_bounds": [lo9, hi9],
+                   "decompression_palliative_pct_bounds": [r(100 * lo9 / T2, 1), r(100 * hi9 / T2, 1)],
+                   "no_decompression_palliative_pct_bounds": [r(100 * (T8 - hi9) / (T1 - T2), 1),
+                                                              r(100 * (T8 - lo9) / (T1 - T2), 1)],
+                   "by_band_pct": {x[0]: x[3] for x in pa},
+                   "share_aged_75plus_pct": r(100 * (P8["75-79"] + P8["80+"]) / sum(P8.values()), 1),
+                   "trend_z_p": [r(zpl, 2), float(f"{ppl:.2g}")],
+                   "suppressed_max": SUPPRESSED_MAX}
+trend_rows += [["palliative_share_oedema_cochran_armitage_z", r(zpl, 2), "", "", f"{ppl:.2g}", ""]]
 trend_rows += [["thrombectomy_share_cochran_armitage_z", r(zmt, 2), "", "", f"{pmt:.2g}", ""],
                ["thrombolysis_share_cochran_armitage_z", r(ziv, 2), "", "", f"{piv:.2g}", ""],
                ["oedema_decompression_share_cochran_armitage_z", r(z, 2), "", "", f"{p:.2g}", ""]]

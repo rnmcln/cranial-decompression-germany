@@ -42,6 +42,8 @@ hemicraniectomy from other decompression and does not record infarct territory.
   considered.
 - Disposition by age, and intracranial thrombectomy (OPS 8-836.80) and systemic
   thrombolysis (8-020.8) coded in the same episode.
+- Palliative-care procedure codes (OPS 8-982, 8-98e, 8-98h) among oedema-coded
+  primary-I63 episodes, with and without decompression.
 - In-hospital mortality (discharge reason 07) overall and by age band.
 - Discharge disposition (discharge reasons 06, 07, 09, 10 and a residual).
 - Linear change over the six data years.
@@ -61,6 +63,7 @@ hemicraniectomy from other decompression and does not record infarct territory.
 | Discharge disposition | transfer 39.9%, death 24.5%, rehabilitation 22.9%, residual 11.1%, nursing facility 1.5% |
 | Change in disposition | transfer 37.8% to 42.6%; rehabilitation 27.4% to 19.6% |
 | Thrombectomy coded in the same episode | 43.2% (2019: 39.6%; 2024: 49.8%) |
+| Palliative-care code among oedema-coded episodes | 1.8% overall (2019: 1.2%; 2024: 2.9%); 0.6–0.9% with and 1.9–2.0% without decompression |
 
 **Interpretation.** Half of the decompression episodes involved patients aged
 60 years or older, almost all of them younger than 75 years. Relative to the
@@ -69,8 +72,9 @@ was rare beyond 75 years, where in-hospital mortality approached 40%. The
 gradient persisted among strokes coded with oedema or brain compression.
 
 **Scope.** The analysis is descriptive and unadjusted. Functional outcome,
-stroke severity, timing of surgery and treatment limitations are not recorded
-in the data source. A death after interhospital transfer is not recorded in
+stroke severity, timing of surgery and decisions to limit treatment are not
+recorded in the data source; palliative-care procedure codes record structured
+palliative treatment only. A death after interhospital transfer is not recorded in
 the operative episode.
 
 ## Repository layout
@@ -83,9 +87,10 @@ data/
   subcode_disposition_denominator_by_year.json I63 subcode composition, discharge disposition
                                                and the all-primary-I63 denominator with its
                                                age distribution, by data year
-  additional_queries_by_year.json              November 2026 queries Q0-Q7 (oedema-defined
-                                               subgroup, disposition by age and reperfusion
-                                               co-coding), by data year
+  additional_queries_by_year.json              November 2026 queries Q0-Q9 (oedema-defined
+                                               subgroup, disposition by age, reperfusion
+                                               co-coding and palliative-care codes, with the
+                                               code list used in each year), by data year
 src/
   common.py      age-band definitions, data loading, interval estimators
   analysis.py    computes every reported value; writes results/
@@ -109,6 +114,10 @@ the disposition residual and the handling of suppressed cells.
   counts. The residual (total minus these four reasons) contains routine and
   home discharge, other reasons and hospice discharges, which were suppressed
   (fewer than four) or zero in every year.
+- **Suppressed cells in the additional queries.** The decompression subset of
+  the palliative-care query (Q9) is below the display threshold in 2019 to
+  2022. Each suppressed cell is carried as zero to three episodes, and pooled
+  proportions that involve it are reported as ranges.
 - **Intervals and tests.** Wilson intervals for proportions; Poisson (Byar)
   intervals for utilisation ratios; Katz interval for the risk ratio; Newcombe
   hybrid score interval for the risk difference; log-linear Poisson model with
@@ -147,13 +156,14 @@ Figures use Liberation Sans, falling back to Arial, Helvetica or DejaVu Sans.
 | `age_strata.csv` | risk ratio and risk difference for death, 60 or older versus below 60 |
 | `disposition_by_year.csv` | disposition counts by year, pooled count and share |
 | `subcode_by_year.csv` | I63 subcode groups by year |
-| `temporal_trends.csv` | trend estimates for utilisation, transfer, rehabilitation and mortality |
+| `temporal_trends.csv` | trend estimates for utilisation, transfer, rehabilitation, mortality and the shares from the additional queries |
 | `integrity_checks.csv` | consistency checks across queries |
 | `integrity_checks_additional.csv` | consistency checks for the November 2026 queries |
 | `oedema_subgroup_by_year.csv` | oedema-coded primary-I63 episodes, decompression within them and mortality, by year |
 | `oedema_subgroup_by_age.csv` | the same by age band, with 95% CI |
 | `disposition_by_age.csv` | transfer, rehabilitation and death by age band |
 | `reperfusion_by_year.csv`, `reperfusion_by_age.csv` | thrombectomy and thrombolysis coded in the same episode |
+| `palliative_by_year.csv`, `palliative_by_age.csv` | palliative-care codes among oedema-coded episodes, with and without decompression |
 | `summary.json` | all reported values in one file |
 
 | Figure | Content |
