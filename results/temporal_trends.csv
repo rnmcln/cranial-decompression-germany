@@ -3,3 +3,6 @@ utilisation_ratio_rate_ratio_per_year,0.995,0.974,1.016,,1.93
 rehabilitation_share_cochran_armitage_z,-4.26,,,2e-05,
 transfer_share_cochran_armitage_z,2.93,,,0.0034,
 in_hospital_mortality_cochran_armitage_z,0.73,,,0.46,
+thrombectomy_share_cochran_armitage_z,5.29,,,1.2e-07,
+thrombolysis_share_cochran_armitage_z,1.2,,,0.23,
+oedema_decompression_share_cochran_armitage_z,0.79,,,0.43,

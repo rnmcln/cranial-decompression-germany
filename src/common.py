@@ -50,6 +50,13 @@ SUBCODE_GROUPS = [
 ]
 
 
+def load_additional():
+    """Queries added in November 2026 (oedema-defined subgroup, disposition by age and
+    reperfusion co-coding); see the _meta block of the file."""
+    with open(os.path.join(DATA, "additional_queries_by_year.json"), encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load():
     with open(os.path.join(DATA, "cohort_by_year.json"), encoding="utf-8") as f:
         cohort = json.load(f)

@@ -246,3 +246,136 @@ assert all(row[4] and row[6] and row[7] for row in chk), "integrity check failed
 with open(os.path.join(RESULTS, "summary.json"), "w", encoding="utf-8") as f:
     json.dump(S, f, indent=1, ensure_ascii=False)
 print(json.dumps(S, indent=1, ensure_ascii=False))
+
+
+# ======================================================================
+# Additional queries (November 2026): oedema-defined subgroup, disposition
+# by age and reperfusion co-coding
+# ======================================================================
+from common import load_additional  # noqa: E402
+
+A = load_additional()["years"]
+
+
+def bands(rec):
+    """Reconstructed age-band counts for one query record."""
+    return band_counts(rec["age_bands_pct"], rec["n"], COHORT_MAP)
+
+
+def pooled(q):
+    tot = {b: 0.0 for b in BANDS}
+    for y in YEARS:
+        for b, v in bands(A[y][q]).items():
+            tot[b] += v
+    return tot
+
+
+add_chk = []
+for y in YEARS:
+    base = COH["years"][y]["base_cohort"]
+    disp = EXT["years"][y]["disposition"]
+    q = A[y]
+    same_age = all(abs(q["Q0"]["age_bands_pct"][k] - base["age_bands_pct"][k]) < 1e-9
+                   for k in base["age_bands_pct"])
+    row = [y, q["Q0"]["n"], base["episode_count"], q["Q0"]["n"] == base["episode_count"], same_age,
+           q["Q4"]["n"] == disp["transfer_06"], q["Q5"]["n"] == disp["rehabilitation_09"],
+           q["Q2"]["n"] <= q["Q1"]["n"] and q["Q2"]["n"] <= q["Q0"]["n"] and q["Q3"]["n"] <= q["Q2"]["n"],
+           q["Q6"]["n"] <= q["Q0"]["n"] and q["Q7"]["n"] <= q["Q0"]["n"]]
+    add_chk.append(row)
+write("integrity_checks_additional.csv",
+      ["year", "cohort_reextracted", "cohort_original", "cohort_count_match", "cohort_age_distribution_match",
+       "transfer_count_match", "rehabilitation_count_match", "oedema_subsets_nested",
+       "reperfusion_subsets_nested"], add_chk)
+assert all(all(r[3:]) for r in add_chk), "additional integrity check failed"
+
+# ---- oedema-defined subgroup by year
+oe_rows = []
+for y in YEARS:
+    q = A[y]
+    n0, n1, n2, n3 = q["Q0"]["n"], q["Q1"]["n"], q["Q2"]["n"], q["Q3"]["n"]
+    l1, u1 = wilson(n2, n1)
+    oe_rows.append([y, n1, n2, r(100 * n2 / n0, 1), r(100 * n2 / n1, 2), r(100 * l1, 2), r(100 * u1, 2),
+                    n3, r(100 * n3 / n2, 1)])
+T1 = sum(A[y]["Q1"]["n"] for y in YEARS); T2 = sum(A[y]["Q2"]["n"] for y in YEARS)
+T3 = sum(A[y]["Q3"]["n"] for y in YEARS)
+l1, u1 = wilson(T2, T1); lm, um = wilson(T3, T2)
+oe_rows.append(["Pooled", T1, T2, r(100 * T2 / N, 1), r(100 * T2 / T1, 2), r(100 * l1, 2), r(100 * u1, 2),
+                T3, r(100 * T3 / T2, 1)])
+write("oedema_subgroup_by_year.csv",
+      ["year", "I63_with_oedema_code", "decompression_with_oedema_code", "share_of_cohort_pct",
+       "decompression_pct_of_oedema_episodes", "lcl", "ucl", "deaths", "mortality_pct"], oe_rows)
+S["oedema"] = {"I63_with_oedema_total": T1, "decompression_with_oedema_total": T2,
+               "share_of_cohort_pct": r(100 * T2 / N, 1),
+               "share_of_cohort_range": [min(x[3] for x in oe_rows[:-1]), max(x[3] for x in oe_rows[:-1])],
+               "operated_pct": [r(100 * T2 / T1, 1), r(100 * l1, 1), r(100 * u1, 1)],
+               "operated_pct_range": [min(x[4] for x in oe_rows[:-1]), max(x[4] for x in oe_rows[:-1])],
+               "deaths": T3, "mortality_pct": [r(100 * T3 / T2, 1), r(100 * lm, 1), r(100 * um, 1)]}
+z, p = cochran_armitage([A[y]["Q2"]["n"] for y in YEARS], [A[y]["Q1"]["n"] for y in YEARS])
+S["oedema"]["trend_operated_z_p"] = [r(z, 2), float(f"{p:.2g}")]
+
+# ---- oedema-defined subgroup by age
+P1, P2, P3 = pooled("Q1"), pooled("Q2"), pooled("Q3")
+oa = []
+for name, grp in [(b, [b]) for b in BANDS] + [("<60", LT60), (">=60", GE60)]:
+    d1 = sum(P1[b] for b in grp); d2 = sum(P2[b] for b in grp); d3 = sum(P3[b] for b in grp)
+    lo, hi = wilson(d2, d1); ml, mh = wilson(d3, d2)
+    oa.append([name, round(d1), round(d2), r(100 * d2 / d1, 2), r(100 * lo, 2), r(100 * hi, 2),
+               round(d3), r(100 * d3 / d2, 2), r(100 * ml, 2), r(100 * mh, 2)])
+write("oedema_subgroup_by_age.csv",
+      ["age_band", "I63_with_oedema_code", "decompression_with_oedema_code", "decompression_pct", "lcl", "ucl",
+       "deaths", "mortality_pct", "mortality_lcl", "mortality_ucl"], oa)
+S["oedema_by_band_pct"] = {x[0]: x[3] for x in oa}
+S["oedema_by_band_ci"] = {x[0]: [x[4], x[5]] for x in oa}
+S["oedema_mortality_by_band"] = {x[0]: x[7] for x in oa}
+S["oedema_mortality_by_band_ci"] = {x[0]: [x[8], x[9]] for x in oa}
+lt = next(x for x in oa if x[0] == "<60"); ge = next(x for x in oa if x[0] == ">=60")
+S["oedema_lt60_vs_ge60_fold"] = r(lt[3] / ge[3], 1)
+S["oedema_I63_share_75plus_pct"] = r(100 * (P1["75-79"] + P1["80+"]) / sum(P1.values()), 1)
+
+# ---- disposition by age (study cohort)
+P0, P4, P5 = pooled("Q0"), pooled("Q4"), pooled("Q5")
+da = []
+for name, grp in [(b, [b]) for b in BANDS] + [("<60", LT60), (">=60", GE60)]:
+    e = sum(P0[b] for b in grp); t = sum(P4[b] for b in grp); h = sum(P5[b] for b in grp)
+    x = sum(pool_dth[b] for b in grp)
+    tl, tu = wilson(t, e); hl, hu = wilson(h, e)
+    da.append([name, round(e), round(t), r(100 * t / e, 2), r(100 * tl, 2), r(100 * tu, 2),
+               round(h), r(100 * h / e, 2), r(100 * hl, 2), r(100 * hu, 2), r(100 * x / e, 2)])
+write("disposition_by_age.csv",
+      ["age_band", "episodes", "transfer", "transfer_pct", "transfer_lcl", "transfer_ucl",
+       "rehabilitation", "rehabilitation_pct", "rehabilitation_lcl", "rehabilitation_ucl", "death_pct"], da)
+S["transfer_by_band_pct"] = {x[0]: x[3] for x in da}
+S["rehab_by_band_pct"] = {x[0]: x[7] for x in da}
+
+# ---- reperfusion co-coding in the study cohort
+rp = []
+for y in YEARS:
+    n0, mt, ivt = A[y]["Q0"]["n"], A[y]["Q6"]["n"], A[y]["Q7"]["n"]
+    rp.append([y, n0, mt, r(100 * mt / n0, 1), ivt, r(100 * ivt / n0, 1)])
+MT = sum(A[y]["Q6"]["n"] for y in YEARS); IVT = sum(A[y]["Q7"]["n"] for y in YEARS)
+rp.append(["Pooled", N, MT, r(100 * MT / N, 1), IVT, r(100 * IVT / N, 1)])
+write("reperfusion_by_year.csv", ["year", "episodes", "thrombectomy", "thrombectomy_pct", "thrombolysis",
+                                  "thrombolysis_pct"], rp)
+zmt, pmt = cochran_armitage([A[y]["Q6"]["n"] for y in YEARS], Ns)
+ziv, piv = cochran_armitage([A[y]["Q7"]["n"] for y in YEARS], Ns)
+P6, P7 = pooled("Q6"), pooled("Q7")
+ra = []
+for name, grp in [(b, [b]) for b in BANDS] + [("<60", LT60), (">=60", GE60)]:
+    e = sum(P0[b] for b in grp); m_ = sum(P6[b] for b in grp); i_ = sum(P7[b] for b in grp)
+    ra.append([name, round(e), round(m_), r(100 * m_ / e, 2), round(i_), r(100 * i_ / e, 2)])
+write("reperfusion_by_age.csv", ["age_band", "episodes", "thrombectomy", "thrombectomy_pct", "thrombolysis",
+                                 "thrombolysis_pct"], ra)
+S["reperfusion"] = {"thrombectomy_pooled": [MT, r(100 * MT / N, 1)], "thrombolysis_pooled": [IVT, r(100 * IVT / N, 1)],
+                    "thrombectomy_pct_by_year": {x[0]: x[3] for x in rp[:-1]},
+                    "thrombolysis_pct_by_year": {x[0]: x[5] for x in rp[:-1]},
+                    "trend_thrombectomy_z_p": [r(zmt, 2), float(f"{pmt:.2g}")],
+                    "trend_thrombolysis_z_p": [r(ziv, 2), float(f"{piv:.2g}")],
+                    "thrombectomy_by_band_pct": {x[0]: x[3] for x in ra}}
+trend_rows += [["thrombectomy_share_cochran_armitage_z", r(zmt, 2), "", "", f"{pmt:.2g}", ""],
+               ["thrombolysis_share_cochran_armitage_z", r(ziv, 2), "", "", f"{piv:.2g}", ""],
+               ["oedema_decompression_share_cochran_armitage_z", r(z, 2), "", "", f"{p:.2g}", ""]]
+write("temporal_trends.csv", ["measure", "estimate", "lcl", "ucl", "p_two_sided", "pearson_dispersion"],
+      trend_rows)
+
+with open(os.path.join(RESULTS, "summary.json"), "w", encoding="utf-8") as f:
+    json.dump(S, f, indent=1, ensure_ascii=False)

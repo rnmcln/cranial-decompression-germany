@@ -70,16 +70,16 @@ x = list(range(len(BANDS)))
 
 # ---------------------------------------------------------------- Figure 1
 util = {r["age_band"]: r for r in read("utilisation_by_age.csv")}
-fig, (a, b) = plt.subplots(1, 2, figsize=(180 * MM, 66 * MM), gridspec_kw={"wspace": 0.32})
+fig, (a, b, c3) = plt.subplots(1, 3, figsize=(180 * MM, 62 * MM), gridspec_kw={"wspace": 0.42})
 coh = [S["cohort_band_share_pct"][k] for k in BANDS]
 den = [S["I63_band_share_pct"][k] for k in BANDS]
 for i in x:
     a.plot([i, i], [coh[i], den[i]], color=LIGHT, lw=LW, zorder=1)
 a.plot(x, den, ls="none", marker="o", ms=3.6, mfc="white", mec=INK, mew=LW, zorder=3)
 a.plot(x, coh, ls="none", marker="o", ms=3.6, mfc=ACCENT, mec=ACCENT, mew=LW, zorder=3)
-a.text(6.75, den[7], "All primary-I63\nepisodes", ha="right", va="center", fontsize=6.5)
-a.text(5.0, coh[5] + 2.0, "Cranial decompression\nepisodes", ha="center", va="bottom",
-       fontsize=6.5, color=ACCENT)
+a.text(6.7, den[7], "All primary-I63\nepisodes", ha="right", va="center", fontsize=6)
+a.text(5.0, coh[5] + 2.0, "Decompression\nepisodes", ha="center", va="bottom",
+       fontsize=6, color=ACCENT)
 a.set_ylim(0, 45)
 a.set_yticks([0, 10, 20, 30, 40])
 a.spines["left"].set_bounds(0, 40)
@@ -103,6 +103,22 @@ b.set_yticklabels(["0.1", "0.3", "1", "3", "10", "30"])
 b.set_ylabel("Episodes per 1000 primary-I63 episodes\n(log scale)")
 age_axis(b)
 panel(b, "b")
+
+oe = {r["age_band"]: r for r in read("oedema_subgroup_by_age.csv")}
+v = [float(oe[k]["decompression_pct"]) for k in BANDS]
+lo = [float(oe[k]["lcl"]) for k in BANDS]
+hi = [float(oe[k]["ucl"]) for k in BANDS]
+c3.vlines(x, lo, hi, color=INK, lw=LW)
+c3.plot(x, v, color=INK, lw=LW, marker="o", ms=3.2, mfc="white", mec=INK, mew=LW)
+top = 10 * (int(max(hi) // 10) + 1)
+c3.set_ylim(0, top)
+c3.set_yticks(list(range(0, top + 1, 10)))
+c3.spines["left"].set_bounds(0, top)
+c3.set_ylabel("Decompression episodes per 100 primary-I63\nepisodes with coded oedema")
+age_axis(c3)
+panel(c3, "c")
+for ax_ in (a, b, c3):
+    ax_.tick_params(axis="x", labelrotation=90)
 save(fig, "fig1_age_utilisation")
 
 # ---------------------------------------------------------------- Figure 2
@@ -173,4 +189,20 @@ ax.spines["left"].set_bounds(0, 100)
 ax.set_ylabel("Share of cohort episodes (%)")
 ax.set_xlabel("Data year")
 save(fig, "figS1_subcode_by_year")
+# ------------------------------------------------------- Supplementary S2
+da = {r["age_band"]: r for r in read("disposition_by_age.csv")}
+fig, ax = plt.subplots(figsize=(120 * MM, 66 * MM))
+for key, lab, col, mk, face in (("transfer_pct", "Transfer to another hospital", ACCENT, "o", ACCENT),
+                                ("death_pct", "In-hospital death", INK, "o", "white"),
+                                ("rehabilitation_pct", "Rehabilitation facility", INK, "s", "white")):
+    v = [float(da[k][key]) for k in BANDS]
+    ax.plot(x, v, color=col, lw=LW, marker=mk, ms=3.0, mfc=face, mec=col, mew=LW)
+    ax.text(7.25, v[-1], lab, fontsize=6.5, va="center", ha="left", color=col)
+ax.set_ylim(0, 60)
+ax.set_yticks([0, 10, 20, 30, 40, 50, 60])
+ax.spines["left"].set_bounds(0, 60)
+ax.set_ylabel("Share of episodes (%)")
+age_axis(ax)
+ax.set_xlim(-0.5, 7.4)
+save(fig, "figS2_disposition_by_age")
 print("figures written to", FIGURES)
